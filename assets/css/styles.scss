@@ -1,0 +1,53 @@
+$main-color: #00C89F;
+$sub-color: #00c1c8;
+
+* {
+	margin: 0;
+	padding: 0;
+    box-sizing: border-box;
+    
+    &::-webkit-scrollbar {
+        width: 5px;
+        background-color: transparent;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background-color: $main-color;
+    }
+}
+
+@mixin flex($dirc: row, $just: space-between, $align: center, $wrap: nowrap) {
+	display: flex;
+	flex-direction: $dirc;
+	justify-content: $just;
+	align-content: $align;
+	flex-wrap: $wrap;
+}
+
+@mixin base-padding {
+    padding: 1rem 1.5rem;
+}
+
+@font-face {
+    font-family: RobotoReg;
+    src: url('../fonts/Roboto-Regular.ttf');
+}
+
+@font-face {
+    font-family: RobotoThin;
+    src: url('../fonts/Roboto-Thin.ttf');
+}
+
+@font-face {
+    font-family: ProdReg;
+    src: url('../fonts/Product Sans Regular.ttf');
+}
+
+@font-face {
+    font-family: ProdBold;
+    src: url('../fonts/Product Sans Bold.ttf');
+}
+
+.flex {
+	@include flex();
+}

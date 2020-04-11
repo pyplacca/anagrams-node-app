@@ -1,0 +1,19 @@
+{
+  "name": "anagramator-2",
+  "version": "1.0.0",
+  "description": "Forming anagrams from jumbled words",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "anagrams",
+    "jumble",
+    "spelling"
+  ],
+  "author": "pyPlacca",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^8.2.0"
+  }
+}
