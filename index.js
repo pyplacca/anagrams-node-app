@@ -1,7 +1,7 @@
 const { readFileSync } = require('fs');
-const extras = require('./extras')
+const helpers = require('./helpers')
 
-let generator = new extras.Trie()
+let generator = new helpers.Trie()
 // access and create dictionary
 let dictionary = JSON.parse(readFileSync(
     './assets/webster.json', 
@@ -18,7 +18,7 @@ if (dictionary) {
 
 function groupByLength(arr) {
     // returns an object of items 
-    let result = new extras.DefaultDict( Array )
+    let result = new helpers.DefaultDict( Array )
 
     for (let item of arr) {
         result[item.length].push(item)
@@ -54,7 +54,7 @@ function displayResults(obj) {
     main.innerHTML = '' // clear previous result
     getDefinition({target:{innerText:'Definition'}}) // using this as careof to reset the definition display area
 
-    const obj_keys = extras.sorted(
+    const obj_keys = helpers.sorted(
         Object.keys( obj ), { reverse: true }
     )
     for (const key of obj_keys) {
@@ -75,7 +75,7 @@ function displayResults(obj) {
 
         // append individual words (anagrams)
         const container = html.querySelector('.anagrams')
-        for (const word of extras.sorted(obj[key])) {
+        for (const word of helpers.sorted(obj[key])) {
             const word_elem = new DOMParser().parseFromString(
                 `<p class="word">${word}</p>`, 'text/html'
             ).body.firstChild

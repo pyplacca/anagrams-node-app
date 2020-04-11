@@ -65,5 +65,5 @@ function sorted(arr, opts={ key:undefined, reverse:false }) {
 module.exports = {
     Trie,
     DefaultDict,
-    sorted
+    sorted,
 }
