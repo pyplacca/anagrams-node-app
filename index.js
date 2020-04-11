@@ -18,33 +18,52 @@ if (dictionary) {
 
 function groupByLength(arr) {
     // returns an object of items 
-    let result = new helpers.DefaultDict( Array )
+    let result = new Object()
 
     for (let item of arr) {
-        result[item.length].push(item)
+        n = item.length
+        if (!(n in result)) {
+            result[n] = new Array()
+        }
+        result[n].push(item)
     }
     return result
 }
 
+function switchActiveWord(elem, class_) {
+    // try {
+    prev = document.querySelector(`.${class_}`)
+    if (prev) {
+        prev.classList.remove(class_)
+    }
+    if (elem.classList) {
+        elem.classList.add(class_)
+    }
+}
+
 function getDefinition(event) {
-    word = event.target.innerText
+    // remove class name from previously element
+    elem = event.target
+    switchActiveWord(elem, 'active')
+
+    word = elem.innerText
     temp_obj = {
         highlight: word, 
         definition: word in dictionary ? 
             dictionary[word] : 'Select a word to see it\'s definition'
     }
     for (let id in temp_obj) {
-        document.querySelector(`#${id}`).innerText = temp_obj[id]
+        document.getElementById(id).innerText = temp_obj[id]
     }
 }
 
 function generateWords(event) {
     event.preventDefault() // prevents page refresh
     // generate anagrams
-    const jumble = document.querySelector('#jumble').value
+    const jumble = document.getElementById('jumble').value
     const anagrams = generator.getAll(jumble)
     // update result count
-    document.querySelector('#result-count').innerText = anagrams.length
+    document.getElementById('result-count').innerText = anagrams.length
 
     displayResults(groupByLength(anagrams))
 }
@@ -54,8 +73,8 @@ function displayResults(obj) {
     main.innerHTML = '' // clear previous result
     getDefinition({target:{innerText:'Definition'}}) // using this as careof to reset the definition display area
 
-    const obj_keys = helpers.sorted(
-        Object.keys( obj ), { reverse: true }
+    const obj_keys = helpers.reversed(
+        Object.keys( obj )
     )
     for (const key of obj_keys) {
         // create container for generated anagrams based on groups
@@ -109,6 +128,6 @@ Object.keys(event_elems).forEach((key) => {
     document.querySelector(key).addEventListener(elem.event, elem.func)
 })
 */
-document.querySelector('#generate').addEventListener(
+document.getElementById('generate').addEventListener(
     'click', generateWords
 )

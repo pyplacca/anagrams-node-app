@@ -61,9 +61,15 @@ function sorted(arr, opts={ key:undefined, reverse:false }) {
     return arr
 }
 
+function reversed(arr) {
+    arr = new Array(...arr)
+    arr.reverse()
+    return arr
+}
     
 module.exports = {
     Trie,
     DefaultDict,
     sorted,
+    reversed,
 }

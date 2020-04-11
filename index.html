@@ -7,25 +7,25 @@
   <script src="./index.js" defer></script>
   <title>Anagrams</title>
 </head>
-<body class="flex">
-  <div class="container">
-    <header>
-      <form> <!-- method="POST"-->
-        <input id="jumble" type="search" placeholder="Enter a word jumble" autofocus>
-        <button id='generate'>Generate anagrams</button>
-      </form>
+<body >
+  <header >
+    <form> <!-- method="POST"-->
+      <input id="jumble" type="search" placeholder="Enter a word jumble" autofocus>
+      <button id='generate'>Generate anagrams</button>
       <p><span id="result-count">0</span> total words generated</p>        
-
-    </header>
+    </form>
+    
+  </header>
+  <div class="container">
     <main class="display-area">
     </main>
 
+    <aside class="word-define">
+      <h3 id="highlight">Definition</h3>
+      <p id="definition">
+        Select a word to see its definition
+      </p>
+    </aside>
   </div>
-  <aside class="recent-search">
-    <h1 id="highlight">Definition</h1>
-    <p id="definition">
-      Select a word to see its definition
-    </p>
-  </aside>
 </body>
 </html>
