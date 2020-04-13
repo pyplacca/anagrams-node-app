@@ -1,0 +1,61 @@
+.definition-card {
+    $size: 250px;
+    $radius: 6px;
+    $bg: rgb(223, 223, 223);
+    $fg: rgb(80, 80, 80);
+
+    position: absolute;
+
+    display: none;
+    // display: flex;
+    // flex-direction: column;
+    z-index: 10;
+
+    margin: 2vh auto;
+
+    width: $size;
+    height: $size;
+    // transform: scale(0);
+    transform-origin: bottom;
+    background-color: #fff;
+
+    // border: 1.5px solid $main-color;
+    border-radius: $radius;
+    box-shadow: 0 0 3px $bg;
+
+    // animation: enlarge .7s ease-in-out 1s forwards;
+    
+    #highlight {
+        $r: $radius;
+
+        padding: 5% 6% 0 6%;
+        border-radius: $r $r 0 0;
+        // text-align: center;
+        text-transform: uppercase;
+        // background-color: $bg;
+        color: $fg;
+    }
+    
+    #definition {
+        height: auto;
+        padding: 6%;
+        text-align: justify;
+
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+            width: 6px;
+            background-color: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: $bg;
+            border-radius: $radius / 2;
+        }
+    }
+}
+
+
+@keyframes enlarge {
+    to { transform: scale(1) }
+}
