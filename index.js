@@ -68,7 +68,7 @@ function generateWords(event) {
     // update result count
     document.getElementById('result-count').innerText = anagrams.length
     
-    updateTitle(jumble)
+    updateTitle(jumble, `${anagrams.length} words`)
 
     displayResults(helpers.groupByLength(anagrams))
 }
@@ -117,9 +117,9 @@ function switchActiveWord(elem, class_) {
     }
 }
 
-function updateTitle(str) {
+function updateTitle(...strs) {
     const title = document.querySelector('head title')
-    title.innerText = `Anagramator - ${str}`
+    title.innerText = ['Anagramator', ...strs].join(' - ')
 }
 
 
