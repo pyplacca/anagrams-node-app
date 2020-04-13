@@ -3,29 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./assets/css/styles.css">
+  <link rel="stylesheet" href="./assets/css/styling.css">
   <script src="./index.js" defer></script>
-  <title>Anagrams</title>
+  <title>Anagramator</title>
 </head>
 <body >
   <header >
-    <form> <!-- method="POST"-->
+    <form>
       <input id="jumble" type="search" placeholder="Enter a word jumble" autofocus>
       <button id='generate'>Generate anagrams</button>
-      <p><span id="result-count">0</span> total words generated</p>        
-    </form>
-    
+    </form>  
+    <p class="count-display"><span id="result-count">0</span> total words generated</p>        
   </header>
+  
   <div class="container">
     <main class="display-area">
     </main>
 
-    <aside class="word-define">
-      <h3 id="highlight">Definition</h3>
+    <aside class="definition-display">
+      <h4 id="highlight">Definition</h4>
       <p id="definition">
         Select a word to see its definition
       </p>
     </aside>
   </div>
+
+  <div class="app-colors">
+    <div class="color"></div>
+    <div class="color"></div>
+    <div class="color"></div>
+    <div class="color"></div>
+    <div class="color"></div>
+  </div>
+
+  <img src="./assets/images/logo_BWB.png" alt="fixed logo" id="fixed-logo">
+
 </body>
 </html>

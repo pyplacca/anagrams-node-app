@@ -1,8 +1,26 @@
-$main-color: rgb(31, 160, 235);
+$main-color: #12a761;
+$light-val: 12%;
+$light-main: lighten($main-color, $light-val);
+$text-gray: gray;
+$r: 9px;
 
 @font-face {
     font-family: RobotoReg;
     src: url('../fonts/Roboto-Regular.ttf');
+}
+
+@font-face {
+    font-family: RobotoThin;
+    src: url('../fonts/Roboto-Thin.ttf');
+}
+@font-face {
+    font-family: ProdReg;
+    src: url('../fonts/Product Sans Regular.ttf');
+}
+
+@font-face {
+    font-family: ProdBold;
+    src: url('../fonts/Product Sans Bold.ttf');
 }
 
 * {
@@ -10,63 +28,6 @@ $main-color: rgb(31, 160, 235);
     padding: 0;
     box-sizing: border-box;
     outline: none;
-}
-
-.definition-card {
-    $size: 250px;
-    $radius: 6px;
-    $bg: rgb(223, 223, 223);
-    $fg: rgb(80, 80, 80);
-
-    position: absolute;
-
-    display: none;
-    // display: flex;
-    // flex-direction: column;
-    z-index: 10;
-
-    margin: 2vh auto;
-
-    width: $size;
-    height: $size;
-    // transform: scale(0);
-    transform-origin: bottom;
-    background-color: #fff;
-
-    // border: 1.5px solid $main-color;
-    border-radius: $radius;
-    box-shadow: 0 0 3px $bg;
-
-    // animation: enlarge .7s ease-in-out 1s forwards;
-    
-    #highlight {
-        $r: $radius;
-
-        padding: 5% 6% 0 6%;
-        border-radius: $r $r 0 0;
-        // text-align: center;
-        text-transform: uppercase;
-        // background-color: $bg;
-        color: $fg;
-    }
-    
-    #definition {
-        height: auto;
-        padding: 6%;
-        text-align: justify;
-
-        overflow-y: auto;
-
-        &::-webkit-scrollbar {
-            width: 6px;
-            background-color: transparent;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            background-color: $bg;
-            border-radius: $radius / 2;
-        }
-    }
 }
 
 @mixin flex(
@@ -80,18 +41,24 @@ $main-color: rgb(31, 160, 235);
 }
 
 header {
-    height: 11vh;
+    height: 90px;
     position: sticky;
     top: 0;
     transition: height .3s ease-in-out;
 
     &.smaller {
-        height: 6vh;
+        height: 45px;
         box-shadow: 0 2px 4px #c4c4c4;
         transition: height .5s ease-in-out;
-      
+        
         form {
             height: 100%;
+            
+            #jumble {
+                color: $main-color;
+                font-size: 1.2rem;
+                transition: font .5s ease-in-out;
+            }
         }
 
         .count-display {
@@ -109,12 +76,23 @@ header {
             width: inherit;
             border: none;
             outline: none;
+
+            // background-image: url('../images/search.svg');
+            // background-repeat: no-repeat;
+            // background-size: 25px;
+            // background-position: 25px center;
+
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 1.55rem;
+            color: $text-gray;
             transition: font .3s ease-in-out;
 
+            &::placeholder {
+                opacity: .7;
+            }
+
             &:focus::placeholder {
-                opacity: .3;
+                opacity: .2;
             }
         }
         
@@ -137,12 +115,199 @@ header {
         font-family: RobotoReg;
         
         #result-count {
-            margin-right:.5%;
+            margin-right: 5px;
         }
     }
 }
 
+.container {
+    display: flex;
+    $pad: 20px;
 
-@keyframes enlarge {
-    to { transform: scale(1) }
+    .display-area {
+        padding-left: $pad;
+        width: 90%;
+        padding: 3vh auto;
+        margin: 25px auto;
+        
+        display: grid;
+        grid-template-columns: repeat(
+            auto-fill, minmax(370px, 1fr)
+        );
+        column-gap: 25px;
+        row-gap: 25px;
+
+        .word-group {
+            border-radius: $r;
+
+            .letter-count {
+                cursor: pointer;
+
+                font-family: ProdBold;
+                letter-spacing: .05rem;
+                font-size: medium;
+                
+                border-radius: $r $r 0 0 ;
+                padding: 10px 17px;
+                
+                background: rgb(172, 172, 172);
+                background-color: $light-main;
+                color: darken($main-color, 35%);
+                
+                &.hidden-active {
+                    background-color: unset;
+                    color: $light-main;
+                    
+                    border: 1px solid $light-main;
+                    border-radius: $r;
+
+                    letter-spacing: .05rem;
+                }
+            }
+            
+            .anagrams {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: left;
+
+                padding: 10px;
+                margin-top: .5vh;
+
+                border: 1px solid $light-main;
+                border-top: 0;
+                border-radius: 0 0 $r $r;
+
+                &.hidden {
+                    display: none;
+                }
+
+                .word {
+                    font-family: RobotoReg;
+                    font-weight: 200;
+                    color: $text-gray;
+
+                    $mg: 10px;
+                    margin: $mg / 2 $mg $mg / 2 0;
+                    padding: 5px 7px;
+
+                    border-radius: $r;
+
+                    user-select: none;
+
+                    &:hover {
+                        cursor: pointer;
+                        background: $light-main;
+                        color: #fff;
+                    }
+                    
+                    &.active {
+                        color: #fff;
+                        background: $main-color;
+                        
+                        &:hover {
+                            cursor: default;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .definition-display {
+        $def-color: $main-color;
+
+        height: 83vh;
+        padding: $pad $pad / 2 $pad $pad;
+        margin: 25px $pad 2.5vh $pad;
+        flex-basis: 350px;
+
+        display: flex;
+        flex-direction: column;
+
+        position: sticky;
+        top: 90px;
+
+        border: 2px solid $def-color;
+        border-radius: $r;
+
+        #highlight {
+            margin-bottom: 17px;
+            font-family: ProdReg;
+            letter-spacing: .1rem;
+            text-transform: uppercase;
+            color: $def-color;
+            
+        }
+        
+        #definition {
+            padding-right: $pad / 2;
+            font-family: RobotoReg;
+            font-size: .87rem;
+            line-height: 1.4rem;
+            color: $text-gray;
+            display: flex;
+            overflow-y: auto;
+
+            &::-webkit-scrollbar {
+                background-color: #ebebeb;
+                width: 6px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: $def-color;
+                border-radius: 3px;
+            }
+        }
+    }
+}
+
+// App colors
+.app-colors {
+    $size: 15px;
+    $count: 5;
+
+    width: $size * ($count + 3);
+    @include flex();
+    position: fixed;
+    padding: 9px;
+    bottom: 9px;
+    left: 20px;
+
+    opacity: .4;
+
+    &:hover {
+        opacity: 1;
+    }
+    
+    .color {
+        cursor: pointer;
+        
+        width: $size;
+        height: $size;
+        border-radius: 50%;
+
+        @each $i, $color in 
+            1 $main-color,
+            2 #a73012,
+            3 #129da7,
+            4 #a7126e,
+            5 #a5a712 {
+                $color: lighten($color, $light-val);
+                &:nth-child(#{$i}) {
+                    background-color: $color;
+                }
+        }
+    }
+}
+
+#fixed-logo {
+    position: fixed;
+    bottom: 9px;
+    right: 20px;
+    transform: scale(1.2);
+    opacity: .5;
+
+    &:hover {
+        opacity: 1;
+    }
 }
