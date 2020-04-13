@@ -2,7 +2,7 @@ const { readFileSync } = require('fs');
 const helpers = require('./helpers')
 
 let generator = new helpers.Trie()
-// access and create dictionary
+// access src and create dictionary
 let dictionary = JSON.parse(readFileSync(
     './assets/webster.json', 
     (err, data) => {
@@ -16,49 +16,6 @@ if (dictionary) {
     }
 }
 
-function updateTitle(str) {
-    const title = document.querySelector('head title')
-    title.innerText = `Anagramator - ${str}`
-}
-
-function switchActiveWord(elem, class_) {
-    prev = document.querySelector(`.${class_}`)
-    if (prev) {
-        prev.classList.remove(class_)
-    }
-    if (elem.classList) {
-        elem.classList.add(class_)
-    }
-}
-
-function getDefinition(event) {
-    // remove class name from previous element
-    elem = event.target
-    switchActiveWord(elem, 'active')
-
-    word = elem.innerText
-    temp_obj = {
-        highlight: word, 
-        definition: word in dictionary ? 
-            dictionary[word] : 'Select a word to see it\'s definition'
-    }
-    for (let id in temp_obj) {
-        document.getElementById(id).innerText = temp_obj[id]
-    }
-}
-
-function generateWords(event) {
-    event.preventDefault() // prevents page refresh
-    // generate anagrams
-    const jumble = document.getElementById('jumble').value.toLowerCase()
-    const anagrams = generator.getAll(jumble)
-    // update result count
-    document.getElementById('result-count').innerText = anagrams.length
-    
-    updateTitle(jumble)
-
-    displayResults(helpers.groupByLength(anagrams))
-}
 
 function displayResults(obj) {
     const main = document.querySelector('.display-area')
@@ -76,8 +33,7 @@ function displayResults(obj) {
             <section class="word-group">
                 <h3 class="letter-count" title="Click to toggle view">
                     ${key} letters
-                    <span class="chevron">
-                    </span>
+                    <span id="word-count"></span>
                 </h3>
                 <div class="anagrams">
                 </div>
@@ -97,16 +53,73 @@ function displayResults(obj) {
             )
             container.appendChild(word_elem)
         }
-        // add collapse support
-        html.querySelector('.letter-count').addEventListener(
-            'click', (event) => {
-                elem = event.target
-                elem.classList.toggle('hidden-active')
-                elem.nextElementSibling.classList.toggle('hidden')
-            }
-        )
-        main.appendChild(html)
+
+        showWordCount(html, obj[key])
+
+        makeCollapsable( html ) // add collapse support
+        main.appendChild( html )
     }
+}
+function generateWords(event) {
+    event.preventDefault() // prevents page refresh
+    // generate anagrams
+    const jumble = document.getElementById('jumble').value
+    const anagrams = generator.getAll(jumble.toLowerCase())
+    // update result count
+    document.getElementById('result-count').innerText = anagrams.length
+    
+    updateTitle(jumble)
+
+    displayResults(helpers.groupByLength(anagrams))
+}
+
+function getDefinition(event) {
+    // remove class name from previous element
+    elem = event.target
+    switchActiveWord(elem, 'active')
+
+    word = elem.innerText
+    temp_obj = {
+        highlight: word, 
+        definition: word in dictionary ? 
+            dictionary[word] : 'Select a word to see it\'s definition'
+    }
+    for (let id in temp_obj) {
+        document.getElementById(id).innerText = temp_obj[id]
+    }
+}
+
+function makeCollapsable(tag) {
+    tag.querySelector('.letter-count').addEventListener(
+        'click', (event) => {
+            elem = event.target
+            elem.classList.toggle('hidden-active')
+            elem.nextElementSibling.classList.toggle('hidden')
+        }
+    )
+}
+
+function showWordCount(elem, arr) {
+    console.log(elem)
+    word_count = arr.length;
+    elem.querySelector('#word-count').innerText = `\
+        ${word_count} word${word_count > 1 ? 's' : ''}\
+    `
+}
+
+function switchActiveWord(elem, class_) {
+    prev = document.querySelector(`.${class_}`)
+    if (prev) {
+        prev.classList.remove(class_)
+    }
+    if (elem.classList) {
+        elem.classList.add(class_)
+    }
+}
+
+function updateTitle(str) {
+    const title = document.querySelector('head title')
+    title.innerText = `Anagramator - ${str}`
 }
 
 

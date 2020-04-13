@@ -141,6 +141,7 @@ header {
             border-radius: $r;
 
             .letter-count {
+                $darker: darken($main-color, 35%);
                 cursor: pointer;
 
                 font-family: ProdBold;
@@ -150,9 +151,22 @@ header {
                 border-radius: $r $r 0 0 ;
                 padding: 10px 17px;
                 
-                background: rgb(172, 172, 172);
                 background-color: $light-main;
-                color: darken($main-color, 35%);
+                color: $darker;
+
+                #word-count {
+                    padding: 4px 9px;
+                    margin-left: 4px;
+
+                    font-family: ProdReg;
+                    font-size: .8rem;
+                    font-weight: 200;
+                    
+                    background-color: $darker;
+                    color: $light-main;
+                    
+                    border-radius: $r / 2;
+                }
                 
                 &.hidden-active {
                     background-color: unset;
@@ -162,6 +176,11 @@ header {
                     border-radius: $r;
 
                     letter-spacing: .05rem;
+
+                    #word-count {
+                        display: none;
+
+                    }
                 }
             }
             

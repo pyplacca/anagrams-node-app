@@ -172,9 +172,19 @@ header .count-display #result-count {
   font-size: medium;
   border-radius: 9px 9px 0 0;
   padding: 10px 17px;
-  background: #acacac;
   background-color: #18de81;
   color: #010603;
+}
+
+.container .display-area .word-group .letter-count #word-count {
+  padding: 4px 9px;
+  margin-left: 4px;
+  font-family: ProdReg;
+  font-size: .8rem;
+  font-weight: 200;
+  background-color: #010603;
+  color: #18de81;
+  border-radius: 4.5px;
 }
 
 .container .display-area .word-group .letter-count.hidden-active {
@@ -183,6 +193,10 @@ header .count-display #result-count {
   border: 1px solid #18de81;
   border-radius: 9px;
   letter-spacing: .05rem;
+}
+
+.container .display-area .word-group .letter-count.hidden-active #word-count {
+  display: none;
 }
 
 .container .display-area .word-group .anagrams {
