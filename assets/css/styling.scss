@@ -1,0 +1,148 @@
+$main-color: rgb(31, 160, 235);
+
+@font-face {
+    font-family: RobotoReg;
+    src: url('../fonts/Roboto-Regular.ttf');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.definition-card {
+    $size: 250px;
+    $radius: 6px;
+    $bg: rgb(223, 223, 223);
+    $fg: rgb(80, 80, 80);
+
+    position: absolute;
+
+    display: none;
+    // display: flex;
+    // flex-direction: column;
+    z-index: 10;
+
+    margin: 2vh auto;
+
+    width: $size;
+    height: $size;
+    // transform: scale(0);
+    transform-origin: bottom;
+    background-color: #fff;
+
+    // border: 1.5px solid $main-color;
+    border-radius: $radius;
+    box-shadow: 0 0 3px $bg;
+
+    // animation: enlarge .7s ease-in-out 1s forwards;
+    
+    #highlight {
+        $r: $radius;
+
+        padding: 5% 6% 0 6%;
+        border-radius: $r $r 0 0;
+        // text-align: center;
+        text-transform: uppercase;
+        // background-color: $bg;
+        color: $fg;
+    }
+    
+    #definition {
+        height: auto;
+        padding: 6%;
+        text-align: justify;
+
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+            width: 6px;
+            background-color: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: $bg;
+            border-radius: $radius / 2;
+        }
+    }
+}
+
+@mixin flex(
+    $dirc: row, $just: space-between, $align: center, $wrap: nowrap
+    ) {
+	display: flex;
+	flex-direction: $dirc;
+	align-items: $align;
+	justify-content: $just;
+	flex-wrap: $wrap;
+}
+
+header {
+    height: 11vh;
+    position: sticky;
+    top: 0;
+    transition: height .3s ease-in-out;
+
+    &.smaller {
+        height: 6vh;
+        box-shadow: 0 2px 4px #c4c4c4;
+        transition: height .5s ease-in-out;
+      
+        form {
+            height: 100%;
+        }
+
+        .count-display {
+            display: none;
+        }
+    }
+    
+    form {
+        height: 65%;
+        width: 100%;
+        background-color: #fff;
+        
+        #jumble {
+            height: 100%;
+            width: inherit;
+            border: none;
+            outline: none;
+            text-align: center;
+            font-size: 1.2rem;
+            transition: font .3s ease-in-out;
+
+            &:focus::placeholder {
+                opacity: .3;
+            }
+        }
+        
+        #generate {
+            display: none;
+        }
+    }
+
+    .count-display {
+        height: 35%;
+        width: 100%;
+
+        @include flex($just:center);
+        
+        background-color: $main-color;
+        color: #fff;
+        
+        text-align: center;
+        font-size: .9rem;
+        font-family: RobotoReg;
+        
+        #result-count {
+            margin-right:.5%;
+        }
+    }
+}
+
+
+@keyframes enlarge {
+    to { transform: scale(1) }
+}

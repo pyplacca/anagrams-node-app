@@ -1,0 +1,157 @@
+@font-face {
+  font-family: RobotoReg;
+  src: url("../fonts/Roboto-Regular.ttf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  outline: none;
+}
+
+.definition-card {
+  position: absolute;
+  display: none;
+  z-index: 10;
+  margin: 2vh auto;
+  width: 250px;
+  height: 250px;
+  -webkit-transform-origin: bottom;
+          transform-origin: bottom;
+  background-color: #fff;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 0 3px #dfdfdf;
+          box-shadow: 0 0 3px #dfdfdf;
+}
+
+.definition-card #highlight {
+  padding: 5% 6% 0 6%;
+  border-radius: 6px 6px 0 0;
+  text-transform: uppercase;
+  color: #505050;
+}
+
+.definition-card #definition {
+  height: auto;
+  padding: 6%;
+  text-align: justify;
+  overflow-y: auto;
+}
+
+.definition-card #definition::-webkit-scrollbar {
+  width: 6px;
+  background-color: transparent;
+}
+
+.definition-card #definition::-webkit-scrollbar-thumb {
+  background-color: #dfdfdf;
+  border-radius: 3px;
+}
+
+header {
+  height: 11vh;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  -webkit-transition: height .3s ease-in-out;
+  transition: height .3s ease-in-out;
+}
+
+header.smaller {
+  height: 6vh;
+  -webkit-box-shadow: 0 2px 4px #c4c4c4;
+          box-shadow: 0 2px 4px #c4c4c4;
+  -webkit-transition: height .5s ease-in-out;
+  transition: height .5s ease-in-out;
+}
+
+header.smaller form {
+  height: 100%;
+}
+
+header.smaller .count-display {
+  display: none;
+}
+
+header form {
+  height: 65%;
+  width: 100%;
+  background-color: #fff;
+}
+
+header form #jumble {
+  height: 100%;
+  width: inherit;
+  border: none;
+  outline: none;
+  text-align: center;
+  font-size: 1.2rem;
+  -webkit-transition: font .3s ease-in-out;
+  transition: font .3s ease-in-out;
+}
+
+header form #jumble:focus::-webkit-input-placeholder {
+  opacity: .3;
+}
+
+header form #jumble:focus:-ms-input-placeholder {
+  opacity: .3;
+}
+
+header form #jumble:focus::-ms-input-placeholder {
+  opacity: .3;
+}
+
+header form #jumble:focus::placeholder {
+  opacity: .3;
+}
+
+header form #generate {
+  display: none;
+}
+
+header .count-display {
+  height: 35%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  background-color: #1fa0eb;
+  color: #fff;
+  text-align: center;
+  font-size: .9rem;
+  font-family: RobotoReg;
+}
+
+header .count-display #result-count {
+  margin-right: .5%;
+}
+
+@-webkit-keyframes enlarge {
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes enlarge {
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+/*# sourceMappingURL=styling.css.map */
