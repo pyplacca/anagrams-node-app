@@ -56,7 +56,10 @@ function displayResults(obj) {
 
         showWordCount(html, obj[key])
 
-        makeCollapsable( html ) // add collapse support
+        makeCollapsable( 
+            html.querySelector('.letter-count') 
+        ) // add collapse support
+        
         main.appendChild( html )
     }
 }
@@ -90,7 +93,7 @@ function getDefinition(event) {
 }
 
 function makeCollapsable(tag) {
-    tag.querySelector('.letter-count').addEventListener(
+    tag.addEventListener(
         'click', (event) => {
             elem = event.target
             elem.classList.toggle('hidden-active')
@@ -107,13 +110,13 @@ function showWordCount(elem, arr) {
     `
 }
 
-function switchActiveWord(elem, class_) {
-    prev = document.querySelector(`.${class_}`)
+function switchActiveWord(elem, cls) {
+    prev = document.querySelector('.' + cls)
     if (prev) {
-        prev.classList.remove(class_)
+        prev.classList.remove(cls)
     }
     if (elem.classList) {
-        elem.classList.add(class_)
+        elem.classList.add(cls)
     }
 }
 
