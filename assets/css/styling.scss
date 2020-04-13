@@ -141,7 +141,7 @@ header {
             border-radius: $r;
 
             .letter-count {
-                $darker: darken($main-color, 35%);
+                $darker: darken($main-color, 22%);
                 cursor: pointer;
 
                 font-family: ProdBold;
@@ -179,7 +179,6 @@ header {
 
                     #word-count {
                         display: none;
-
                     }
                 }
             }

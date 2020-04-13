@@ -173,7 +173,7 @@ header .count-display #result-count {
   border-radius: 9px 9px 0 0;
   padding: 10px 17px;
   background-color: #18de81;
-  color: #010603;
+  color: #074226;
 }
 
 .container .display-area .word-group .letter-count #word-count {
@@ -182,7 +182,7 @@ header .count-display #result-count {
   font-family: ProdReg;
   font-size: .8rem;
   font-weight: 200;
-  background-color: #010603;
+  background-color: #074226;
   color: #18de81;
   border-radius: 4.5px;
 }
