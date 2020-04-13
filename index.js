@@ -42,6 +42,7 @@ function switchActiveWord(elem, class_) {
 }
 
 function getDefinition(event) {
+    console.log(event)
     // remove class name from previously element
     elem = event.target
     switchActiveWord(elem, 'active')
@@ -60,7 +61,7 @@ function getDefinition(event) {
 function generateWords(event) {
     event.preventDefault() // prevents page refresh
     // generate anagrams
-    const jumble = document.getElementById('jumble').value
+    const jumble = document.getElementById('jumble').value.toLowerCase()
     const anagrams = generator.getAll(jumble)
     // update result count
     document.getElementById('result-count').innerText = anagrams.length
@@ -72,6 +73,7 @@ function displayResults(obj) {
     const main = document.querySelector('.display-area')
     main.innerHTML = '' // clear previous result
     getDefinition({target:{innerText:'Definition'}}) // using this as careof to reset the definition display area
+    console.log(event)
 
     const obj_keys = helpers.reversed(
         Object.keys( obj )
@@ -131,3 +133,23 @@ Object.keys(event_elems).forEach((key) => {
 document.getElementById('generate').addEventListener(
     'click', generateWords
 )
+
+document.addEventListener('scroll', event => {
+    // path.global.scrollY/scrollX/outerHeight/outerWidth/screenX/screenY
+    let doc = event.path[1];
+    const header = document.querySelector('header')
+    
+    doc.scrollY ? 
+        header.classList.add('smaller') :
+            header.attributes.removeNamedItem('class')
+    // console.log(`
+    //     scrollX: ${doc.scrollX}, 
+    //     scrollY: ${doc.scrollY}, 
+    //     screenX: ${doc.screenX}, 
+    //     screenY: ${doc.screenY}, 
+    //     outerWidth: ${doc.outerHeight}, 
+    //     outerHeight: ${doc.outerWidth}
+    // `)
+})
+
+
