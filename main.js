@@ -7,12 +7,12 @@ function createWindow () {
     height: 600,
     webPreferences: {
       nodeIntegration: true
-    }
+    },
+    icon: 'assets/images/logo_square.png',
   })
 
   // and load the index.html of the app.
-  win.loadFile('./app.html')
+  win.loadFile('./index.html')
 }
 
 app.whenReady().then(createWindow)
-
