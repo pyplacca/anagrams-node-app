@@ -107,6 +107,7 @@ header {
         p {
             padding: .7rem;
             opacity: 0;
+            color: $main-color;
             
             text-align: center;
             font-family: RobotoReg;
@@ -122,7 +123,7 @@ header {
 
 @mixin grid($col_width, $col_gap, $row_gap:0) {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax($col_width, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax($col_width, 1fr));
     column-gap: $col_gap; 
     row-gap: $row_gap;
 }

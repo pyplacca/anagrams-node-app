@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/css/styling.css">
+  <script src="./index.js" defer></script>
+  <title>Anagramator</title>
+</head>
+<body >
+  <div class="definition-card">
+    <h4 id="highlight">Definition</h4>
+    <p id="definition">
+      Select a word to see its definition
+      
+    </p>
+  </div>
+
+  <header >
+    <form> <!-- method="POST"-->
+      <input id="jumble" type="search" placeholder="Enter a word jumble" autofocus>
+      <button id='generate'>Generate anagrams</button>
+    </form>  
+    <p class="count-display"><span id="result-count">0</span> total words generated</p>        
+  </header>
+
+  <main class="display-area">
+  </main>
+
+</body>
+</html>
