@@ -16,22 +16,12 @@ if (dictionary) {
     }
 }
 
-function groupByLength(arr) {
-    // returns an object of items 
-    let result = new Object()
-
-    for (let item of arr) {
-        n = item.length
-        if (!(n in result)) {
-            result[n] = new Array()
-        }
-        result[n].push(item)
-    }
-    return result
+function updateTitle(str) {
+    const title = document.querySelector('head title')
+    title.innerText = `Anagramator - ${str}`
 }
 
 function switchActiveWord(elem, class_) {
-    // try {
     prev = document.querySelector(`.${class_}`)
     if (prev) {
         prev.classList.remove(class_)
@@ -42,8 +32,7 @@ function switchActiveWord(elem, class_) {
 }
 
 function getDefinition(event) {
-    console.log(event)
-    // remove class name from previously element
+    // remove class name from previous element
     elem = event.target
     switchActiveWord(elem, 'active')
 
@@ -65,15 +54,17 @@ function generateWords(event) {
     const anagrams = generator.getAll(jumble)
     // update result count
     document.getElementById('result-count').innerText = anagrams.length
+    
+    updateTitle(jumble)
 
-    displayResults(groupByLength(anagrams))
+    displayResults(helpers.groupByLength(anagrams))
 }
 
 function displayResults(obj) {
     const main = document.querySelector('.display-area')
     main.innerHTML = '' // clear previous result
-    getDefinition({target:{innerText:'Definition'}}) // using this as careof to reset the definition display area
-    console.log(event)
+
+    getDefinition( { target: { innerText:'Definition' } } ) // using this as careof to reset the definition display area
 
     const obj_keys = helpers.reversed(
         Object.keys( obj )
@@ -83,7 +74,7 @@ function displayResults(obj) {
         const html = new DOMParser().parseFromString(
             `
             <section class="word-group">
-                <h3 class="letter-count">
+                <h3 class="letter-count" title="Click to toggle view">
                     ${key} letters
                     <span class="chevron">
                     </span>
@@ -104,52 +95,32 @@ function displayResults(obj) {
             word_elem.addEventListener(
                 'click', getDefinition
             )
-            // add chevron click event
             container.appendChild(word_elem)
         }
+        // add collapse support
+        html.querySelector('.letter-count').addEventListener(
+            'click', (event) => {
+                elem = event.target
+                elem.classList.toggle('hidden-active')
+                elem.nextElementSibling.classList.toggle('hidden')
+            }
+        )
         main.appendChild(html)
     }
 }
 
-// Event listeners
-/*
-event_elems = {
-    '#generate': {
-        event: 'click',
-        func: generateWords,
-    },
-    '.word': {
-        event: 'click',
-        func: getDefinition,
-    }
-}
-// create events
-Object.keys(event_elems).forEach((key) => {
-    console.log(key)
-    const elem = event_elems[key]
-    document.querySelector(key).addEventListener(elem.event, elem.func)
-})
-*/
+
+// Primary Event Listeners
+
 document.getElementById('generate').addEventListener(
     'click', generateWords
-)
+);
 
 document.addEventListener('scroll', event => {
-    // path.global.scrollY/scrollX/outerHeight/outerWidth/screenX/screenY
     let doc = event.path[1];
     const header = document.querySelector('header')
     
     doc.scrollY ? 
         header.classList.add('smaller') :
             header.attributes.removeNamedItem('class')
-    // console.log(`
-    //     scrollX: ${doc.scrollX}, 
-    //     scrollY: ${doc.scrollY}, 
-    //     screenX: ${doc.screenX}, 
-    //     screenY: ${doc.screenY}, 
-    //     outerWidth: ${doc.outerHeight}, 
-    //     outerHeight: ${doc.outerWidth}
-    // `)
 })
-
-
