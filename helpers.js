@@ -53,6 +53,20 @@ class Trie {
     }
 }
 
+function groupByLength(arr) {
+    // returns an object of items 
+    let output = new Object()
+
+    for (let item of arr) {
+        n = item.length
+        if (!(n in output)) {
+            output[n] = new Array()
+        }
+        output[n].push(item)
+    }
+    return output
+}
+
 function sorted(arr, opts={ key:undefined, reverse:false }) {
     arr = new Array(...arr).sort(opts.key)
     if (opts.reverse) {
@@ -72,4 +86,5 @@ module.exports = {
     DefaultDict,
     sorted,
     reversed,
+    groupByLength,
 }
