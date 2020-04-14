@@ -1,0 +1,53 @@
+.definition-card {
+  position: absolute;
+  display: none;
+  z-index: 10;
+  margin: 2vh auto;
+  width: 250px;
+  height: 250px;
+  -webkit-transform-origin: bottom;
+          transform-origin: bottom;
+  background-color: #fff;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 0 3px #dfdfdf;
+          box-shadow: 0 0 3px #dfdfdf;
+}
+
+.definition-card #highlight {
+  padding: 5% 6% 0 6%;
+  border-radius: 6px 6px 0 0;
+  text-transform: uppercase;
+  color: #505050;
+}
+
+.definition-card #definition {
+  height: auto;
+  padding: 6%;
+  text-align: justify;
+  overflow-y: auto;
+}
+
+.definition-card #definition::-webkit-scrollbar {
+  width: 6px;
+  background-color: transparent;
+}
+
+.definition-card #definition::-webkit-scrollbar-thumb {
+  background-color: #dfdfdf;
+  border-radius: 3px;
+}
+
+@-webkit-keyframes enlarge {
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes enlarge {
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+/*# sourceMappingURL=unused.css.map */

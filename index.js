@@ -79,7 +79,7 @@ function generateWords(event) {
 function getDefinition(event) {
     // remove class name from previous element
     elem = event.target
-    switchActiveWord(elem, 'active')
+    switchWordHighlight(elem, 'active')
 
     word = elem.innerText
     temp_obj = {
@@ -103,14 +103,13 @@ function makeCollapsable(tag) {
 }
 
 function showWordCount(elem, arr) {
-    console.log(elem)
     word_count = arr.length;
     elem.querySelector('#word-count').innerText = `\
         ${word_count} word${word_count > 1 ? 's' : ''}\
     `
 }
 
-function switchActiveWord(elem, cls) {
+function switchWordHighlight(elem, cls) {
     prev = document.querySelector('.' + cls)
     if (prev) {
         prev.classList.remove(cls)
@@ -120,9 +119,10 @@ function switchActiveWord(elem, cls) {
     }
 }
 
+const appname = 'Anagramator'
 function updateTitle(...strs) {
     const title = document.querySelector('head title')
-    title.innerText = ['Anagramator', ...strs].join(' - ')
+    title.innerText = [appname, ...strs].join(' - ')
 }
 
 
@@ -140,3 +140,5 @@ document.addEventListener('scroll', event => {
         header.classList.add('smaller') :
             header.attributes.removeNamedItem('class')
 })
+
+updateTitle()
