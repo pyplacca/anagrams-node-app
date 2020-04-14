@@ -167,6 +167,10 @@ header .count-display #result-count {
 
 .container .display-area .word-group .letter-count {
   cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   font-family: HeadBold;
   letter-spacing: .05rem;
   font-size: medium;
@@ -203,11 +207,18 @@ header .count-display #result-count {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: unset;
+      -ms-flex-align: unset;
+          align-items: unset;
   -webkit-box-pack: left;
       -ms-flex-pack: left;
           justify-content: left;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   padding: 10px;
   border: 1px solid #18d1de;
   border-top: 0;

@@ -1,10 +1,15 @@
+// Color variables
 // #12a761
-$main-color: #129da7;
 $light-val: 12%;
-$light-main: lighten($main-color, $light-val);
-$text-gray: gray;
+
+$color-base: #129da7;
+$color-light: lighten($color-base, $light-val);
+$color-dark: darken($color-base, 22%);
+$text-color: gray;
+
 $r: 9px;
 
+// Fonts
 @font-face {
     font-family: RobotoReg;
     src: url('../fonts/Roboto-Regular.ttf');
@@ -31,6 +36,7 @@ $r: 9px;
     outline: none;
 }
 
+// Mixins
 @mixin flex(
     $dirc: row, $just: space-between, $align: center, $wrap: nowrap
     ) {
@@ -41,6 +47,7 @@ $r: 9px;
 	flex-wrap: $wrap;
 }
 
+// Styles
 header {
     height: 90px;
     position: sticky;
@@ -56,7 +63,7 @@ header {
             height: 100%;
             
             #jumble {
-                color: $main-color;
+                color: $color-base;
                 font-size: 1.2rem;
                 transition: font .5s ease-in-out;
             }
@@ -78,14 +85,9 @@ header {
             border: none;
             outline: none;
 
-            // background-image: url('../images/search.svg');
-            // background-repeat: no-repeat;
-            // background-size: 25px;
-            // background-position: 25px center;
-
             text-align: center;
             font-size: 1.55rem;
-            color: $text-gray;
+            color: $text-color;
             transition: font .3s ease-in-out;
 
             &::placeholder {
@@ -108,7 +110,7 @@ header {
 
         @include flex($just:center);
         
-        background-color: $main-color;
+        background-color: $color-base;
         color: #fff;
         
         text-align: center;
@@ -135,15 +137,16 @@ header {
         grid-template-columns: repeat(
             auto-fill, minmax(370px, 1fr)
         );
-        column-gap: 25px;
-        row-gap: 25px;
+        $grid-gap: 25px;
+        column-gap: $grid-gap;
+        row-gap: $grid-gap;
 
         .word-group {
             border-radius: $r;
 
             .letter-count {
-                $darker: darken($main-color, 22%);
                 cursor: pointer;
+                user-select: none;
 
                 font-family: HeadBold;
                 letter-spacing: .05rem;
@@ -152,8 +155,8 @@ header {
                 border-radius: $r $r 0 0 ;
                 padding: 10px 17px;
                 
-                background-color: $light-main;
-                color: $darker;
+                background-color: $color-light;
+                color: $color-dark;
 
                 #word-count {
                     padding: 4px 9px;
@@ -163,17 +166,17 @@ header {
                     font-size: .8rem;
                     font-weight: 200;
                     
-                    background-color: $darker;
-                    color: $light-main;
+                    background-color: $color-dark;
+                    color: $color-light;
                     
                     border-radius: $r / 2;
                 }
                 
                 &.hidden-active {
                     background-color: unset;
-                    color: $light-main;
+                    color: $color-light;
                     
-                    border: 1px solid $light-main;
+                    border: 1px solid $color-light;
                     border-radius: $r;
 
                     letter-spacing: .05rem;
@@ -185,14 +188,12 @@ header {
             }
             
             .anagrams {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: left;
+                @include flex(row, left, unset, wrap);
 
                 padding: 10px;
                 // margin-top: .5vh;
 
-                border: 1px solid $light-main;
+                border: 1px solid $color-light;
                 border-top: 0;
                 border-radius: 0 0 $r $r;
 
@@ -203,7 +204,7 @@ header {
                 .word {
                     font-family: RobotoReg;
                     font-weight: 200;
-                    color: $text-gray;
+                    color: $text-color;
 
                     $mg: 10px;
                     margin: $mg / 2 $mg $mg / 2 0;
@@ -215,13 +216,13 @@ header {
 
                     &:hover {
                         cursor: pointer;
-                        background: $light-main;
+                        background: $color-light;
                         color: #fff;
                     }
                     
                     &.active {
                         color: #fff;
-                        background: $main-color;
+                        background: $color-base;
                         
                         &:hover {
                             cursor: default;
@@ -233,8 +234,6 @@ header {
     }
 
     .definition-display {
-        $def-color: $main-color;
-
         height: 83vh;
         padding: $pad $pad / 2 $pad $pad;
         margin: 25px $pad 2.5vh $pad;
@@ -246,7 +245,7 @@ header {
         position: sticky;
         top: 90px;
 
-        border: 2px solid $def-color;
+        border: 2px solid $color-base;
         border-radius: $r;
 
         #highlight {
@@ -256,8 +255,7 @@ header {
             font-weight: bold;
             letter-spacing: .1rem;
             text-transform: uppercase;
-            color: $def-color;
-            
+            color: $color-base;
         }
         
         #definition {
@@ -265,7 +263,7 @@ header {
             font-family: RobotoReg;
             font-size: .87rem;
             line-height: 1.4rem;
-            color: $text-gray;
+            color: $text-color;
             display: flex;
             overflow-y: auto;
 
@@ -277,7 +275,7 @@ header {
             }
 
             &::-webkit-scrollbar-thumb {
-                background-color: $def-color;
+                background-color: $color-base;
                 border-radius: $scroll-width / 2;
             }
         }
@@ -310,7 +308,7 @@ header {
 //         border-radius: 50%;
 
 //         @each $i, $color in 
-//             1 $main-color,
+//             1 $color-base,
 //             2 #a73012,
 //             3 #129da7,
 //             4 #a7126e,
