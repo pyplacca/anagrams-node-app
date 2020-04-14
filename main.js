@@ -3,12 +3,12 @@ const { app, BrowserWindow } = require('electron')
 function createWindow () {
   // Create the browser window.
   let win = new BrowserWindow({
-    width: 850,
-    height: 740,
+    width: 715,
+    height: 830,
     webPreferences: {
       nodeIntegration: true
     },
-    icon: 'assets/images/logo_square.png',
+    icon: 'assets/icons/logo-png.png',
   })
 
   // and load the index.html of the app.

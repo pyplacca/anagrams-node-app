@@ -250,8 +250,8 @@ header .count-display #result-count {
   height: 83vh;
   padding: 20px 10px 20px 20px;
   margin: 25px 20px 2.5vh 20px;
-  -ms-flex-preferred-size: 350px;
-      flex-basis: 350px;
+  -ms-flex-preferred-size: 370px;
+      flex-basis: 370px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -269,6 +269,8 @@ header .count-display #result-count {
 .container .definition-display #highlight {
   margin-bottom: 17px;
   font-family: HeadReg;
+  font-size: 1.1rem;
+  font-weight: bold;
   letter-spacing: .1rem;
   text-transform: uppercase;
   color: #129da7;

@@ -238,7 +238,7 @@ header {
         height: 83vh;
         padding: $pad $pad / 2 $pad $pad;
         margin: 25px $pad 2.5vh $pad;
-        flex-basis: 350px;
+        flex-basis: 370px;
 
         display: flex;
         flex-direction: column;
@@ -252,6 +252,8 @@ header {
         #highlight {
             margin-bottom: 17px;
             font-family: HeadReg;
+            font-size: 1.1rem;
+            font-weight: bold;
             letter-spacing: .1rem;
             text-transform: uppercase;
             color: $def-color;

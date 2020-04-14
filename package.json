@@ -1,7 +1,7 @@
 {
   "name": "anagramator-2",
   "version": "1.0.0",
-  "description": "Forming anagrams from jumbled words",
+  "description": "Generating anagrams from jumbled words",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
