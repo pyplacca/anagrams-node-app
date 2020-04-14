@@ -80,7 +80,23 @@ function reversed(arr) {
     arr.reverse()
     return arr
 }
-    
+
+/*
+function calcLightness(r, g, b, alpha) {
+    alpha = alpha > 1 ? alpha / 100 : alpha
+
+    let [red, green, blue] = [r, g, b].map(v =>
+        (255 - v) * alpha + v
+    )
+    console.log(red, green, blue)
+    if (red > 255 || green > 255 || blue > 255) {
+        return r, g, b
+    }
+    return [red, green, blue].map(c => parseInt(c))
+}
+*/
+
+
 module.exports = {
     Trie,
     DefaultDict,
