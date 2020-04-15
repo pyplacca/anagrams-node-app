@@ -14,18 +14,9 @@ if (dictionary) {
     }
 }
 
-// get and set last used ui color
-last_applied_color = localStorage.getItem('uiColor')
-if (last_applied_color) {
-    helpers.applyColor(last_applied_color)
-}
-
 // show app colors
-const ui_colors = helpers.parseJSON(
-    './assets/colors.json'
-) 
-
 let colors_div = document.querySelector('.app-colors')
+const ui_colors = helpers.preferences.colors
 for (let color in ui_colors) {
     let child = `
         <div 
@@ -37,7 +28,7 @@ for (let color in ui_colors) {
     `
     colors_div.insertAdjacentHTML('beforeend', child)
 }
-colors_div.addEventListener('click', helpers.changeAppUIColor)
+colors_div.onclick = helpers.changeAppUIColor
 
 // Functions
 function displayResults(obj) {
@@ -73,13 +64,11 @@ function displayResults(obj) {
             )
         )
         // add click event to words
-        anagrams_container.addEventListener(
-            'click', e => {
-                // listens to show definition
-                e.target.classList.contains('word') ?
-                    getDefinition(e) : null
-            }
-        )
+        anagrams_container.onclick =  (e) => {
+            // listens to show definition
+            e.target.classList.contains('word') ?
+                getDefinition(e) : null
+        }
 
         showWordCount(html, obj[key])
         helpers.makeCollapsable( 
@@ -130,9 +119,7 @@ function switchWordHighlight(elem, cls) {
 }
 
 // Primary Event Listeners
-document.getElementById('generate').addEventListener(
-    'click', generateWords
-);
+document.getElementById('generate').onclick = generateWords
 
 document.addEventListener('scroll', event => {
     let doc = event.path[1];
