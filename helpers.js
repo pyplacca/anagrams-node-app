@@ -1,3 +1,5 @@
+const { readFileSync } = require('fs');
+
 const appname = 'Anagramator'
 
 // apply ui color 
@@ -34,6 +36,15 @@ function makeCollapsable(tag) {
     )
 }
 
+function parseJSON(file) {
+    return JSON.parse(readFileSync(
+        file, 
+        (err, data) => {
+            console.log(`error: ${err} data: ${data}`)
+        }
+    ))
+}
+
 function showWordCount(elem, arr) {
     word_count = arr.length;
     elem.querySelector('#word-count').innerText = `\
@@ -50,6 +61,7 @@ module.exports = {
     applyColor,
     changeAppUIColor,
     makeCollapsable,
+    parseJSON,
     showWordCount,
     updateTitle,
 }

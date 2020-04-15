@@ -1,16 +1,12 @@
-const { readFileSync } = require('fs');
 const globals = require('./globals')
 const helpers = require('./helpers')
 
 
 let generator = new globals.Trie()
 // access src and create dictionary
-let dictionary = JSON.parse(readFileSync(
-    './assets/webster.json', 
-    (err, data) => {
-        console.log(`error: ${err} data: ${data}`)
-    }
-))
+let dictionary = helpers.parseJSON(
+    './assets/webster.json'
+)
 // populate generator
 if (dictionary) {
     generator.insertMany(dictionary)
@@ -23,9 +19,9 @@ if (last_applied_color) {
 }
 
 // show app colors
-const ui_colors = JSON.parse(
-    readFileSync('./assets/colors.json'), null
-)
+const ui_colors = helpers.parseJSON(
+    './assets/colors.json'
+) 
 
 let colors_div = document.querySelector('.app-colors')
 for (let color in ui_colors) {
