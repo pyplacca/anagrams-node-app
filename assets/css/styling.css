@@ -1,3 +1,10 @@
+:root {
+  --color-base: #12a761;
+  --color-light: #18de81;
+  --color-dark: #074226;
+  --text-color: gray;
+}
+
 @font-face {
   font-family: RobotoReg;
   src: url("../fonts/Roboto-Regular.ttf");
@@ -48,7 +55,7 @@ header.smaller form {
 }
 
 header.smaller form #jumble {
-  color: #129da7;
+  color: var(--color-base);
   font-size: 1.2rem;
   -webkit-transition: font .5s ease-in-out;
   transition: font .5s ease-in-out;
@@ -71,7 +78,7 @@ header form #jumble {
   outline: none;
   text-align: center;
   font-size: 1.55rem;
-  color: gray;
+  color: var(--text-color);
   -webkit-transition: font .3s ease-in-out;
   transition: font .3s ease-in-out;
 }
@@ -130,7 +137,7 @@ header .count-display {
           justify-content: center;
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
-  background-color: #129da7;
+  background-color: var(--color-base);
   color: #fff;
   text-align: center;
   font-size: .9rem;
@@ -176,8 +183,8 @@ header .count-display #result-count {
   font-size: medium;
   border-radius: 9px 9px 0 0;
   padding: 10px 17px;
-  background-color: #18d1de;
-  color: #073e42;
+  background-color: var(--color-light);
+  color: var(--color-dark);
 }
 
 .container .display-area .word-group .letter-count #word-count {
@@ -186,15 +193,15 @@ header .count-display #result-count {
   font-family: HeadReg;
   font-size: .8rem;
   font-weight: 200;
-  background-color: #073e42;
-  color: #18d1de;
+  background-color: var(--color-dark);
+  color: var(--color-light);
   border-radius: 4.5px;
 }
 
 .container .display-area .word-group .letter-count.hidden-active {
   background-color: unset;
-  color: #18d1de;
-  border: 1px solid #18d1de;
+  color: var(--color-light);
+  border: 1px solid var(--color-light);
   border-radius: 9px;
   letter-spacing: .05rem;
 }
@@ -220,7 +227,7 @@ header .count-display #result-count {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   padding: 10px;
-  border: 1px solid #18d1de;
+  border: 1px solid var(--color-light);
   border-top: 0;
   border-radius: 0 0 9px 9px;
 }
@@ -232,7 +239,7 @@ header .count-display #result-count {
 .container .display-area .word-group .anagrams .word {
   font-family: RobotoReg;
   font-weight: 200;
-  color: gray;
+  color: var(--text-color);
   margin: 5px 10px 5px 0;
   padding: 5px 7px;
   border-radius: 4.5px;
@@ -244,13 +251,13 @@ header .count-display #result-count {
 
 .container .display-area .word-group .anagrams .word:hover {
   cursor: pointer;
-  background: #18d1de;
+  background: var(--color-light);
   color: #fff;
 }
 
 .container .display-area .word-group .anagrams .word.active {
   color: #fff;
-  background: #129da7;
+  background: var(--color-base);
 }
 
 .container .display-area .word-group .anagrams .word.active:hover {
@@ -273,7 +280,7 @@ header .count-display #result-count {
   position: -webkit-sticky;
   position: sticky;
   top: 90px;
-  border: 2px solid #129da7;
+  border: 2px solid var(--color-base);
   border-radius: 9px;
 }
 
@@ -284,7 +291,7 @@ header .count-display #result-count {
   font-weight: bold;
   letter-spacing: .1rem;
   text-transform: uppercase;
-  color: #129da7;
+  color: var(--color-base);
 }
 
 .container .definition-display #definition {
@@ -292,7 +299,7 @@ header .count-display #result-count {
   font-family: RobotoReg;
   font-size: .87rem;
   line-height: 1.4rem;
-  color: gray;
+  color: var(--text-color);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -306,8 +313,51 @@ header .count-display #result-count {
 }
 
 .container .definition-display #definition::-webkit-scrollbar-thumb {
-  background-color: #129da7;
+  background-color: var(--color-base);
   border-radius: 3px;
+}
+
+.app-colors {
+  width: 127.5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  position: fixed;
+  padding: 9px;
+  bottom: 9px;
+  left: 20px;
+}
+
+.app-colors .color-option {
+  cursor: pointer;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  opacity: .4;
+  -webkit-transition-property: opacity, -webkit-transform;
+  transition-property: opacity, -webkit-transform;
+  transition-property: opacity, transform;
+  transition-property: opacity, transform, -webkit-transform;
+  -webkit-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+
+.app-colors .color-option:hover {
+  opacity: 1;
+  -webkit-transform: scale(1.3);
+          transform: scale(1.3);
 }
 
 #fixed-logo {

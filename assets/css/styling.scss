@@ -1,13 +1,13 @@
-// Color variables
-// #12a761
-$light-val: 12%;
-
-$color-base: #129da7;
-$color-light: lighten($color-base, $light-val);
-$color-dark: darken($color-base, 22%);
-$text-color: gray;
-
+// Global variables
+:root {
+    // to be accessed and manipulated at script level
+    --color-base: #12a761;   
+    --color-light: #18de81;   
+    --color-dark: #074226;   
+    --text-color: gray;   
+}
 $r: 9px;
+$light-val: 12%;
 
 // Fonts
 @font-face {
@@ -63,7 +63,7 @@ header {
             height: 100%;
             
             #jumble {
-                color: $color-base;
+                color: var(--color-base);
                 font-size: 1.2rem;
                 transition: font .5s ease-in-out;
             }
@@ -87,7 +87,7 @@ header {
 
             text-align: center;
             font-size: 1.55rem;
-            color: $text-color;
+            color: var(--text-color);
             transition: font .3s ease-in-out;
 
             &::placeholder {
@@ -110,7 +110,7 @@ header {
 
         @include flex($just:center);
         
-        background-color: $color-base;
+        background-color: var(--color-base);
         color: #fff;
         
         text-align: center;
@@ -155,8 +155,8 @@ header {
                 border-radius: $r $r 0 0 ;
                 padding: 10px 17px;
                 
-                background-color: $color-light;
-                color: $color-dark;
+                background-color: var(--color-light);
+                color: var(--color-dark);
 
                 #word-count {
                     padding: 4px 9px;
@@ -166,17 +166,17 @@ header {
                     font-size: .8rem;
                     font-weight: 200;
                     
-                    background-color: $color-dark;
-                    color: $color-light;
+                    background-color: var(--color-dark);
+                    color: var(--color-light);
                     
                     border-radius: $r / 2;
                 }
                 
                 &.hidden-active {
                     background-color: unset;
-                    color: $color-light;
+                    color: var(--color-light);
                     
-                    border: 1px solid $color-light;
+                    border: 1px solid var(--color-light);
                     border-radius: $r;
 
                     letter-spacing: .05rem;
@@ -193,7 +193,7 @@ header {
                 padding: 10px;
                 // margin-top: .5vh;
 
-                border: 1px solid $color-light;
+                border: 1px solid var(--color-light);
                 border-top: 0;
                 border-radius: 0 0 $r $r;
 
@@ -204,7 +204,7 @@ header {
                 .word {
                     font-family: RobotoReg;
                     font-weight: 200;
-                    color: $text-color;
+                    color: var(--text-color);
 
                     $mg: 10px;
                     margin: $mg / 2 $mg $mg / 2 0;
@@ -216,13 +216,13 @@ header {
 
                     &:hover {
                         cursor: pointer;
-                        background: $color-light;
+                        background: var(--color-light);
                         color: #fff;
                     }
                     
                     &.active {
                         color: #fff;
-                        background: $color-base;
+                        background: var(--color-base);
                         
                         &:hover {
                             cursor: default;
@@ -245,7 +245,7 @@ header {
         position: sticky;
         top: 90px;
 
-        border: 2px solid $color-base;
+        border: 2px solid var(--color-base);
         border-radius: $r;
 
         #highlight {
@@ -255,7 +255,7 @@ header {
             font-weight: bold;
             letter-spacing: .1rem;
             text-transform: uppercase;
-            color: $color-base;
+            color: var(--color-base);
         }
         
         #definition {
@@ -263,7 +263,7 @@ header {
             font-family: RobotoReg;
             font-size: .87rem;
             line-height: 1.4rem;
-            color: $text-color;
+            color: var(--text-color);
             display: flex;
             overflow-y: auto;
 
@@ -275,7 +275,7 @@ header {
             }
 
             &::-webkit-scrollbar-thumb {
-                background-color: $color-base;
+                background-color: var(--color-base);
                 border-radius: $scroll-width / 2;
             }
         }
@@ -283,43 +283,33 @@ header {
 }
 
 // App colors
-// .app-colors {
-//     $size: 15px;
-//     $count: 5;
+.app-colors {
+    $size: 15px;
+    $count: 5;
 
-//     width: $size * ($count + 3);
-//     @include flex();
-//     position: fixed;
-//     padding: 9px;
-//     bottom: 9px;
-//     left: 20px;
+    width: $size * ($count + 3.5);
+    @include flex();
+    position: fixed;
+    padding: 9px;
+    bottom: 9px;
+    left: 20px;
 
-//     opacity: .4;
-
-//     &:hover {
-//         opacity: 1;
-//     }
-    
-//     .color {
-//         cursor: pointer;
+    .color-option {
+        cursor: pointer;
         
-//         width: $size;
-//         height: $size;
-//         border-radius: 50%;
-
-//         @each $i, $color in 
-//             1 $color-base,
-//             2 #a73012,
-//             3 #129da7,
-//             4 #a7126e,
-//             5 #a5a712 {
-//                 $color: lighten($color, $light-val);
-//                 &:nth-child(#{$i}) {
-//                     background-color: $color;
-//                 }
-//         }
-//     }
-// }
+        width: $size;
+        height: $size;
+        border-radius: 50%;
+        opacity: .4;
+        transition-property: opacity, transform;
+        transition: all .2s ease-in-out;
+        
+        &:hover {
+            opacity: 1;
+            transform: scale(1.3)
+        }
+    }
+}
 
 #fixed-logo {
     position: fixed;
