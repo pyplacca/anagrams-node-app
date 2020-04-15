@@ -13,9 +13,7 @@ let dictionary = JSON.parse(readFileSync(
 ))
 // populate generator
 if (dictionary) {
-    for (let word in dictionary) {
-        generator.insert(word)
-    }
+    generator.insertMany(dictionary)
 }
 
 // get and set last used ui color
