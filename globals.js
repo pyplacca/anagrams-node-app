@@ -47,7 +47,7 @@ class Trie {
     }
 
     insertMany(...strings) {
-        for (str of strings) {
+        for (let str of strings) {
             this.insert(str)
         }
     }

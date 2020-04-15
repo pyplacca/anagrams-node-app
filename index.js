@@ -9,7 +9,9 @@ let dictionary = helpers.parseJSON(
 )
 // populate generator
 if (dictionary) {
-    generator.insertMany(dictionary)
+    for (word in dictionary) {
+        generator.insert(word)
+    }
 }
 
 // get and set last used ui color
