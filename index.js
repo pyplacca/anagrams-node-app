@@ -1,7 +1,9 @@
 const { readFileSync } = require('fs');
+const globals = require('./globals')
 const helpers = require('./helpers')
 
-let generator = new helpers.Trie()
+
+let generator = new globals.Trie()
 // access src and create dictionary
 let dictionary = JSON.parse(readFileSync(
     './assets/webster.json', 
@@ -16,14 +18,39 @@ if (dictionary) {
     }
 }
 
+// get and set last used ui color
+last_applied_color = localStorage.getItem('uiColor')
+if (last_applied_color) {
+    helpers.applyColor(last_applied_color)
+}
 
+// show app colors
+const ui_colors = JSON.parse(
+    readFileSync('./assets/colors.json'), null
+)
+
+let colors_div = document.querySelector('.app-colors')
+for (let color in ui_colors) {
+    let child = `
+        <div 
+            class="color-option" 
+            id=${color} 
+            style="background-color: ${ui_colors[color].light}"
+            >
+        </div>
+    `
+    colors_div.insertAdjacentHTML('beforeend', child)
+}
+colors_div.addEventListener('click', helpers.changeAppUIColor)
+
+// Functions
 function displayResults(obj) {
     const main = document.querySelector('.display-area')
     main.innerHTML = '' // clear previous result
 
     getDefinition( { target: { innerText:'Definition' } } ) // using this as careof to reset the definition display area
 
-    const obj_keys = helpers.reversed(
+    const obj_keys = globals.reversed(
         Object.keys( obj )
     )
     for (const key of obj_keys) {
@@ -41,28 +68,32 @@ function displayResults(obj) {
             `, 'text/html'
         ).body.firstChild
 
-        // append individual words (anagrams)
-        const container = html.querySelector('.anagrams')
-        for (const word of helpers.sorted(obj[key])) {
-            const word_elem = new DOMParser().parseFromString(
-                `<p class="word">${word}</p>`, 'text/html'
-            ).body.firstChild
-            // create word click event for definition search
-            word_elem.addEventListener(
-                'click', getDefinition
+        const anagrams_container = html.querySelector('.anagrams')
+        // append generated words (anagrams)
+        globals.sorted(obj[key]).forEach(
+            word => anagrams_container.insertAdjacentHTML(
+                'beforeend',
+                `<p class="word">${word}</p>`
             )
-            container.appendChild(word_elem)
-        }
+        )
+        // add click event to words
+        anagrams_container.addEventListener(
+            'click', e => {
+                // listens to show definition
+                e.target.classList.contains('word') ?
+                    getDefinition(e) : null
+            }
+        )
 
         showWordCount(html, obj[key])
-
-        makeCollapsable( 
+        helpers.makeCollapsable( 
             html.querySelector('.letter-count') 
         ) // add collapse support
         
         main.appendChild( html )
     }
 }
+
 function generateWords(event) {
     event.preventDefault() // prevents page refresh
     // generate anagrams
@@ -71,9 +102,9 @@ function generateWords(event) {
     // update result count
     document.getElementById('result-count').innerText = anagrams.length
     
-    updateTitle(jumble, `${anagrams.length} words`)
+    helpers.updateTitle(jumble, `${anagrams.length} words`)
 
-    displayResults(helpers.groupByLength(anagrams))
+    displayResults(globals.groupByLength(anagrams))
 }
 
 function getDefinition(event) {
@@ -92,23 +123,6 @@ function getDefinition(event) {
     }
 }
 
-function makeCollapsable(tag) {
-    tag.addEventListener(
-        'click', (event) => {
-            elem = event.target
-            elem.classList.toggle('hidden-active')
-            elem.nextElementSibling.classList.toggle('hidden')
-        }
-    )
-}
-
-function showWordCount(elem, arr) {
-    word_count = arr.length;
-    elem.querySelector('#word-count').innerText = `\
-        ${word_count} word${word_count > 1 ? 's' : ''}\
-    `
-}
-
 function switchWordHighlight(elem, cls) {
     prev = document.querySelector('.' + cls)
     if (prev) {
@@ -119,15 +133,7 @@ function switchWordHighlight(elem, cls) {
     }
 }
 
-const appname = 'Anagramator'
-function updateTitle(...strs) {
-    const title = document.querySelector('head title')
-    title.innerText = [appname, ...strs].join(' - ')
-}
-
-
 // Primary Event Listeners
-
 document.getElementById('generate').addEventListener(
     'click', generateWords
 );
@@ -141,4 +147,5 @@ document.addEventListener('scroll', event => {
             header.attributes.removeNamedItem('class')
 })
 
-updateTitle()
+// update app title
+helpers.updateTitle()
