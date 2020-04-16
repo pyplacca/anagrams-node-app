@@ -1,15 +1,14 @@
 const { readFileSync, writeFileSync } = require('fs');
 
-const appname = 'Anagramator'
 const preferences = parseJSON(
     './assets/preferences.json'
 ) 
 
 // Load preferences on start
 // apply last used ui color
-last_color = preferences.lastColor
-if (last_color) {
-    applyColor(last_color)
+applied = preferences.appliedColor
+if (applied) {
+    applyColor(applied)
 }
 
 function applyColor(color) {
@@ -22,7 +21,7 @@ function applyColor(color) {
     )
     // save color
     Object.assign(preferences, {
-        lastColor: color
+        appliedColor: color
     })
     savePreferences()
 }
@@ -73,11 +72,6 @@ function savePreferences() {
     )
 }
 
-function updateTitle(...strs) {
-    const title = document.querySelector('head title')
-    title.innerText = [appname, ...strs].join(' - ')
-}
-
 module.exports = {
     preferences,
     applyColor,
@@ -85,6 +79,5 @@ module.exports = {
     makeCollapsable,
     parseJSON,
     showWordCount,
-    updateTitle,
     savePreferences,
 }
