@@ -2,6 +2,8 @@ const globals = require('./globals')
 const helpers = require('./helpers')
 
 
+const appname = 'Anagramator'
+
 let generator = new globals.Trie()
 // access src and create dictionary
 let dictionary = helpers.parseJSON(
@@ -118,6 +120,11 @@ function switchWordHighlight(elem, cls) {
     }
 }
 
+function updateTitle(...strs) {
+    const title = document.querySelector('head title')
+    title.innerText = [appname, ...strs].join(' - ')
+}
+
 // Primary Event Listeners
 document.getElementById('generate').onclick = generateWords
 
@@ -131,4 +138,4 @@ document.addEventListener('scroll', event => {
 })
 
 // update app title
-helpers.updateTitle()
+updateTitle()
