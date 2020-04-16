@@ -32,7 +32,7 @@ function changeAppUIColor(event) {
 
     if (option.className === 'color-option') {
 
-        const color = ui_colors[
+        const color = preferences.colors[
             option.attributes.getNamedItem('id').value
         ]
         applyColor(color)
