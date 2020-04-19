@@ -89,7 +89,7 @@ function generateWords(event) {
     // update result count
     document.getElementById('result-count').innerText = anagrams.length
     
-    helpers.updateTitle(jumble, `${anagrams.length} words`)
+    updateTitle(jumble, `${anagrams.length} words`)
 
     displayResults(globals.groupByLength(anagrams))
 }

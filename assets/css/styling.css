@@ -1,5 +1,5 @@
 :root {
-  --color-base: #12a761;
+  --color-normal: #12a761;
   --color-light: #18de81;
   --color-dark: #074226;
   --text-color: gray;
@@ -55,7 +55,7 @@ header.smaller form {
 }
 
 header.smaller form #jumble {
-  color: var(--color-base);
+  color: var(--color-normal);
   font-size: 1.2rem;
   -webkit-transition: font .5s ease-in-out;
   transition: font .5s ease-in-out;
@@ -137,7 +137,7 @@ header .count-display {
           justify-content: center;
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
-  background-color: var(--color-base);
+  background-color: var(--color-normal);
   color: #fff;
   text-align: center;
   font-size: .9rem;
@@ -257,7 +257,7 @@ header .count-display #result-count {
 
 .container .display-area .word-group .anagrams .word.active {
   color: #fff;
-  background: var(--color-base);
+  background: var(--color-normal);
 }
 
 .container .display-area .word-group .anagrams .word.active:hover {
@@ -280,7 +280,7 @@ header .count-display #result-count {
   position: -webkit-sticky;
   position: sticky;
   top: 90px;
-  border: 2px solid var(--color-base);
+  border: 2px solid var(--color-normal);
   border-radius: 9px;
 }
 
@@ -291,7 +291,7 @@ header .count-display #result-count {
   font-weight: bold;
   letter-spacing: .1rem;
   text-transform: uppercase;
-  color: var(--color-base);
+  color: var(--color-normal);
 }
 
 .container .definition-display #definition {
@@ -313,7 +313,7 @@ header .count-display #result-count {
 }
 
 .container .definition-display #definition::-webkit-scrollbar-thumb {
-  background-color: var(--color-base);
+  background-color: var(--color-normal);
   border-radius: 3px;
 }
 
